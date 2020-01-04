@@ -24,7 +24,6 @@ public class FishMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -65,6 +64,12 @@ public class FishMovement : MonoBehaviour
 
         transform.eulerAngles = new Vector3(0, getOrientation()/2/Mathf.PI*360, 0);
 
+        /*
+        if( newDirX != directionX || newDirY != directionY)
+        {
+            directionX = (directionX > newDirX) ? Mathf.Max(newDirX, directionX - 0.1f) : Mathf.Min(newDirX, directionX + 0.1f);
+            directionY = (directionY > newDirY) ? Mathf.Max(newDirY, directionY - 0.1f) : Mathf.Min(newDirY, directionY + 0.1f);
+        }*/
     }
    
     float getOrientation()

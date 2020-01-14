@@ -26,7 +26,7 @@ public class FishMovement : MonoBehaviour
     float rotationSpeed;
 
     //distance to the boundarie, which if crossed make the fish change direction
-    float offSetHorizontal = 8;
+    float offSetHorizontal = 12;
     float offSetUpDown = 5;
 
     //contail all the different animations of the fish
@@ -274,8 +274,8 @@ public class FishMovement : MonoBehaviour
 
     //the fish can rush if it wan't face a wall too soon in it's curent direction
     bool canRush(){
-        float xDir = transform.position.x + directionX * 350;
-        float zDir = transform.position.z + directionZ * 350;
+        float xDir = transform.position.x + directionX * 500;
+        float zDir = transform.position.z + directionZ * 500;
 
         return !collideGivenPos(xDir, zDir);   
     }

@@ -27,7 +27,7 @@ public class FishMovement : MonoBehaviour
 
     //distance to the boundarie, which if crossed make the fish change direction
     float offSetHorizontal = 12;
-    float offSetUpDown = 5;
+    float offSetUpDown = 8;
 
     //contail all the different animations of the fish
     Animation anim;

@@ -36,6 +36,7 @@ public class FishMovement : MonoBehaviour
 
     bool isFaster = false; //is the fish accelerating
 
+    GameObject cliff;
 
     // Start is called before the first frame update
     void Start()
@@ -56,6 +57,8 @@ public class FishMovement : MonoBehaviour
 
         speed = initialSpeed;
         rotationSpeed = initialRotationSpeed;
+
+        cliff = GameObject.Find("Cliff");
     }
 
     // Update is called once per frame
@@ -66,7 +69,7 @@ public class FishMovement : MonoBehaviour
         transform.eulerAngles = new Vector3(0, getOrientation(), 0);
 
         //the fish can start rushing randomly (only if it met canRush criterias)
-        if (Random.Range(0, 300) == 1 && canRush()){
+        if (Random.Range(0, 400) == 1 && canRush()){
             goFaster();
         }
 
@@ -74,11 +77,15 @@ public class FishMovement : MonoBehaviour
         if(!isFaster && speed > initialSpeed){
             speed = Mathf.Max(speed - 0.01f, initialSpeed);
         }
+        /*
+        if (goTowardCliff()){
+            //transform.localScale = new Vector3(1, 1, 2);
+        }*/
 
         //test is the fish is swimming toward a wall and if it's not already turning, if yes, we will change it direction by updating newDir
         if (newDirX == directionX && newDirZ == directionZ && runToTheWall())
         {
-            Debug.Log("Turn");
+
             //verify that the fish is only near one wall
             if (isNearCorner() == "NO")
             {
@@ -279,6 +286,40 @@ public class FishMovement : MonoBehaviour
 
         return !collideGivenPos(xDir, zDir);   
     }
+
+    //return true is the fish is near and going toward the cliff
+    bool goTowardCliff(){
+
+
+        //if()
+        //transform.localScale = new Vector3(1,1,3);
+        return true;
+
+        /*
+        //get the dimensions of the cliff and its position
+        Vector3 cliffDim = cliff.GetComponent<Collider>().bounds.extents;
+        Vector3 cliffPos = cliff.transform.position;
+        Debug.Log(cliffDim.x + " " + cliffDim.z);
+
+        //planned position of the fish in a few frames
+        float prevX = transform.position.x + 10 * directionX;
+        float prevZ = transform.position.z + 10 * directionZ;
+        
+        return prevX < cliffPos.x + cliffDim.x && prevX > cliffPos.x - cliffDim.x && prevZ < cliffPos.z + cliffDim.z && prevZ > cliffPos.z - cliffDim.z;
+    */
+
+        
+    }
+    
+    void OnCollisionEnter(Collider col)
+    {
+        Debug.Log("ok");
+        if (col.gameObject == cliff)
+            {
+            transform.localScale = new Vector3(3, 1, 1);
+        }
+    }
+
 
     //the fish start to rush
     void goFaster(){
